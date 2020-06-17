@@ -1,0 +1,3 @@
+[submodule "Blockchain-project"]
+	path = Blockchain-project
+	url = https://github.com/preeti13456/Smart-contracts-migration
