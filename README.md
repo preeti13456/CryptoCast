@@ -7,7 +7,9 @@ To create a smart contraction which can be helpful in creating a defi app to inc
 
 If you're Starting with Blockchain you can refer to :
 Blockdegeree Course Basic : https://www.blockdegree.org/blockchain-basic
+
 Blockdegeree Course Advanced  : https://www.blockdegree.org/blockchain-advanced
+
 Blockdegeree Course Proffesional : https://www.blockdegree.org/blockchain-professional
 
 Upgrad is offering free courses as well which you can refer here https://www.upgrad.com/free-courses/
