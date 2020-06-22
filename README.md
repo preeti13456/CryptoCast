@@ -28,11 +28,17 @@ See the issues for topics that need to be covered or updated. If you have an ide
 If you've written an article or blog post, please add it to the bibliography.
 
 Building the documentation site
+
 git clone https://github.com/preeti13456/Blockchain-project.git
+
 cd Blockchain-project
+
 pip install -r requirements.txt
+
 mkdocs build 
+
 You can also use the mkdocs serve command to view the site on localhost, and live reload whenever you save changes.
 
 Redeploying the documentation site
+
 mkdocs gh-deploy
