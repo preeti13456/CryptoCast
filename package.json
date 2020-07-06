@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.5.4"
+  },
+  "dependencies": {
+    "cache-base": "^4.0.0",
+    "chokidar": "^3.4.0"
   }
 }
