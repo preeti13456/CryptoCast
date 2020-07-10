@@ -1,5 +1,5 @@
 {
-  "name": "pet-shop",
+  "name": "smart-contracts-migration",
   "version": "1.0.0",
   "description": "",
   "main": "truffle.js",
@@ -11,6 +11,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+  "contributors": [
+    {
+      "name": "Anjum Rashid",
+      "email": "anjum.bijoy@gmail.com",
+      "url": "https://github.com/bijoy26"
+    },
+    {
+      "name": "Manasir Jisam",
+      "email": "gladevz33@gmail.com",
+      "url": "https://github.com/manasir66 "
+    }
+  ],
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.5.4"
