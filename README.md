@@ -43,6 +43,12 @@ See the issues for topics that need to be covered or updated. If you have an ide
 
 If you've written an article or blog post, please add it to the bibliography.
 
+### Enabling version updates on your fork
+If you wish, you can enable dependency version updates on fork.
+For that, follow [this guide](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates) to enable dependabot on your fork.  
+
+For building the documentation site, do the following on the CLI -
+
 ## :star: :star: This project is a part of **SCI-2020** :star: :star:
 ## **OPEN SOURCE CONTEST - STUDENT CODE-IN**
 
