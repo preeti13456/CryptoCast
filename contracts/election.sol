@@ -2,29 +2,32 @@ pragma solidity ^0.4.2;
 
 contract Election {
 // Model a Candidate
-struct Candidate {
-uint id;
-string name;
-uint voteCount;
+ struct Candidate {
+	uint id;
+	string name;
+	uint voteCount;
 }
 
 // Read/write candidates
 mapping(uint => Candidate) public candidates;
 
+// Store accounts that have voted
+mapping(address => bool) public voters;
+
 // Store Candidates Count
 uint public candidatesCount;
 
-function Election () public {
-addCandidate("Candidate 1");
-addCandidate("Candidate 2");
+constructor() public {
+	addCandidate("Candidate 1");
+	addCandidate("Candidate 2");
 }
 
-function addCandidate (string _name) private {
+function addCandidate(string _name) private {
 candidatesCount ++;
 candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
 }
 
- function vote (uint _candidateId) public {
+ function vote(uint _candidateId) public {
         // require that they haven't voted before
         require(!voters[msg.sender]);
 
@@ -38,8 +41,8 @@ candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
         candidates[_candidateId].voteCount ++;
     }
 }
-contract Election {
-  ...
-  event votedEvent (
-    uint indexed _candidateId
-  );
+//contract Election {
+//  ...
+//  event votedEvent (
+//    uint indexed _candidateId
+//  );
