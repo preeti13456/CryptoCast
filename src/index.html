@@ -32,6 +32,14 @@
               </tbody>
             </table>
             <hr/>
+            <form onsubmit="App.castVote(); return false;">
+              <div class="form-group">
+                <label for="candidatesSelect">Select Candidate </label>
+                <select class="form-control" id="candidatesSelect">
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Vote</button>
+            </form>
             <p id="accountAddress" class="text-center"></p>
           </div>
         </div>
@@ -45,14 +53,6 @@
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
-<form onSubmit="App.castVote(); return false;">
-  <div class="form-group">
-    <label for="candidatesSelect">Select Candidate</label>
-    <select class="form-control" id="candidatesSelect">
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Vote</button>
-  <hr />
-</form>
+
 </body>
 </html>

@@ -14,6 +14,10 @@ mapping(uint => Candidate) public candidates;
 // Store accounts that have voted
 mapping(address => bool) public voters;
 
+// event for logging successful votes
+event votedEvent(
+  uint indexed _candidateId
+  );
 // Store Candidates Count
 uint public candidatesCount;
 
@@ -39,10 +43,8 @@ candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
 
         // update candidate vote Count
         candidates[_candidateId].voteCount ++;
+
+        //trigger voted event
+        votedEvent(_candidateId);
     }
 }
-//contract Election {
-//  ...
-//  event votedEvent (
-//    uint indexed _candidateId
-//  );
