@@ -66,6 +66,7 @@ App = {
     electionInstance = instance;
     return electionInstance.candidatesCount();
   }).then(function(candidatesCount) {
+  //  console.log(candidatesCount);
     var candidatesResults = $("#candidatesResults");
     candidatesResults.empty();
 
@@ -73,6 +74,7 @@ App = {
     candidatesSelect.empty();
 
     for (var i = 1; i <= candidatesCount; i++) {
+
       electionInstance.candidates(i).then(function(candidate) {
         var id = candidate[0];
         var name = candidate[1];
@@ -88,12 +90,15 @@ App = {
         candidatesSelect.append(candidateOption);
       });
     }
+
     return electionInstance.voters(App.account);
   }).then(function(hasVoted) {
     // Do not allow a user to vote
+
     if(hasVoted) {
       $('form').hide();
     }
+
     loader.hide();
     content.show();
   }).catch(function(error) {
@@ -114,7 +119,7 @@ castVote: function() {
       console.error(err);
     });
   }
-
+}
 
   $(function() {
     $(window).load(function() {

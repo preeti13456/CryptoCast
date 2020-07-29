@@ -27,7 +27,7 @@ constructor() public {
 }
 
 function addCandidate(string _name) private {
-candidatesCount ++;
+candidatesCount++;
 candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
 }
 
@@ -42,7 +42,7 @@ candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
         voters[msg.sender] = true;
 
         // update candidate vote Count
-        candidates[_candidateId].voteCount ++;
+        candidates[_candidateId].voteCount++;
 
         //trigger voted event
         votedEvent(_candidateId);

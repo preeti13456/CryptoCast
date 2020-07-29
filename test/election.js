@@ -1,6 +1,8 @@
 var Election = artifacts.require("Election");
 
+//functions from Mocha testing framework
 contract("Election", function(accounts) {
+ //variable to store value during the test time and accessible to these tests only
   var electionInstance;
 
   it("initializes with two candidates", function() {
@@ -26,10 +28,10 @@ contract("Election", function(accounts) {
       assert.equal(candidate[2], 0, "contains the correct votes count");
     });
   });
-});
+
 
 // checks if a vote is casted successfully or not
-it("allows a voter to cast a vote",function(){
+it("Successful vote casting by single voter",function(){
     return Election.deployed().then(function(instance){
       electionInstance = instance;
       candidateId = 1;
@@ -49,7 +51,7 @@ it("allows a voter to cast a vote",function(){
   });
 
   //prevents invalid candidate voting
-  it("throws an exception for invalid candidates", function() {
+  it("Invalid candidate voting exception", function() {
   return Election.deployed().then(function(instance) {
     electionInstance = instance;
     return electionInstance.vote(99, { from: accounts[1] })
@@ -68,7 +70,7 @@ it("allows a voter to cast a vote",function(){
 
 
   //prevents double voting
-it("throws an exception for double voting", function() {
+it("Double voting exception", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
       candidateId = 2;
@@ -91,3 +93,4 @@ it("throws an exception for double voting", function() {
       assert.equal(voteCount, 1, "candidate 2 did not receive any votes");
     });
   });
+});
