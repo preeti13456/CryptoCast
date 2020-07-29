@@ -14,6 +14,10 @@ mapping(uint => Candidate) public candidates;
 // Store accounts that have voted
 mapping(address => bool) public voters;
 
+// event for logging successful votes
+event votedEvent(
+  uint indexed _candidateId
+  );
 // Store Candidates Count
 uint public candidatesCount;
 
@@ -23,7 +27,7 @@ constructor() public {
 }
 
 function addCandidate(string _name) private {
-candidatesCount ++;
+candidatesCount++;
 candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
 }
 
@@ -38,11 +42,9 @@ candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
         voters[msg.sender] = true;
 
         // update candidate vote Count
-        candidates[_candidateId].voteCount ++;
+        candidates[_candidateId].voteCount++;
+
+        //trigger voted event
+        votedEvent(_candidateId);
     }
 }
-//contract Election {
-//  ...
-//  event votedEvent (
-//    uint indexed _candidateId
-//  );
