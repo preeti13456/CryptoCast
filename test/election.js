@@ -13,6 +13,14 @@ contract("Election", function(accounts) {
     });
   });
 
+  it("initializes with two voters", function() {
+    return Election.deployed().then(function(instance) {
+      return instance.votersCount();
+    }).then(function(count) {
+      assert.equal(count, 2);
+    });
+  });
+  
   it("it initializes the candidates with the correct values", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
