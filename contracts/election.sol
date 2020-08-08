@@ -15,10 +15,10 @@ struct Voter {
   uint blindedVote;    // stores each voter's hashed vote
   uint signedBlindedVote;  // blind signature of casted vote
 }
-// Read/write candidates
+// Candidate ID mapped with candidate struct
 mapping(uint => Candidate) public candidates;
 
-// Store accounts that have voted
+// voter address mapped with voter's details and vote details
 mapping(address => Voter) public voters;
 
 // event for logging successful votes
@@ -26,7 +26,7 @@ event votedEvent(
   uint indexed _candidateId
   );
 
-// event for logging successful votes
+// event for logging successful voter registration
 event newVoter(
   uint indexed _nationalID
 );
@@ -34,22 +34,15 @@ event newVoter(
 uint public candidatesCount;   // counter cache for candidates
 uint public votersCount;    // counter cache for voters
 
-// DEMO Voter accounts
-// voter-1 : 0x793ab88bDa1029b65737D71a2402f18D15C09AC8
-// voter-2 : 0xD8b33BF7080dF17888690fa6092300DEd6C19fC8
 constructor() public {
 
   addCandidate("Candidate 1");
 	addCandidate("Candidate 2");
 //  addVoter(100);   addvoter() function is not used in constructor statement because it invokes require(), but the contract hasn't beem created before constructor call
 //  addVoter(200);
-  /* votersCount++;
-  voters[0x793ab88bDa1029b65737D71a2402f18D15C09AC8] = Voter(100,true,false,0,0); // first demo voter NID - 100
-  votersCount++;
-  voters[0x793ab88bDa1029b65737D71a2402f18D15C09AC8] = Voter(200,true,false,0,0); // second demo voter NID - 200 */
-}
+  }
 
-// candidates are pre populated for the election
+// candidates are pre populated for the election (privately intitialized by the contract)
 function addCandidate(string _name) private {
 candidatesCount++;
 candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);

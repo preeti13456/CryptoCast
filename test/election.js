@@ -16,18 +16,18 @@ contract("Election", function(accounts) {
   it("initializes with two voters", function() {
     return Election.deployed().then(function(instance) {
        electionInstance = instance;
-        return electionInstance.addVoter(100,{from: accounts[1]});
-    }).then(function(receipt) {
+        return electionInstance.addVoter(100,{from: accounts[1]});  // voter registration with NID-100 by 2nd account from test blockchain
+    }).then(function(receipt) {        // event receipt to check if event was triggered or not
         assert.equal(receipt.logs.length,1,"an event was triggered");
         assert.equal(receipt.logs[0].event,"newVoter","the event type is correct");
         assert.equal(receipt.logs[0].args._nationalID.toNumber(),100,"the candidate id is correct");
 
-        return electionInstance.addVoter(200,{from: accounts[2]});
+        return electionInstance.addVoter(200,{from: accounts[2]});  // voter registration with NID-200 by 2nd account from test blockchain
       }).then(function(receipt){
         assert.equal(receipt.logs.length,1,"an event was triggered");
         assert.equal(receipt.logs[0].event,"newVoter","the event type is correct");
         assert.equal(receipt.logs[0].args._nationalID.toNumber(),200,"the candidate id is correct");
-        return electionInstance.votersCount();
+        return electionInstance.votersCount();      // check total number of voters
       }).then(function(count){
       assert.equal(count, 2, "contains the correct number of voters");
     });
@@ -52,14 +52,14 @@ contract("Election", function(accounts) {
   it("it initializes the voters with the correct values", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
-      return electionInstance.voters(accounts[1]);
-    }).then(function(voter) { // (NID, eligibility, hasVoted, BlindedVote, signedBlindedVote)
+      return electionInstance.voters(accounts[1]);  // check 2nd account's voter info using its address
+    }).then(function(voter) {         // (NID, eligibility, hasVoted, BlindedVote, signedBlindedVote)
       assert.equal(voter[0], 100, "contains the correct NID");
       assert.equal(voter[1], true, "contains the correct eligibility");
       assert.equal(voter[2], false, "contains the correct voting state");
       assert.equal(voter[3], 0, "contains the correct BlindedVote state");
       assert.equal(voter[4], 0, "contains the correct signedBlindedVote state");
-      return electionInstance.voters(accounts[2]);
+      return electionInstance.voters(accounts[2]);    // check 3rd account's voter info using its address
     }).then(function(voter) {
       assert.equal(voter[0], 200, "contains the correct NID");
       assert.equal(voter[1], true, "contains the correct eligibility");
@@ -75,14 +75,14 @@ it("Successful vote casting by single voter",function(){
     return Election.deployed().then(function(instance){
       electionInstance = instance;
       candidateId = 1;
-      return electionInstance.vote(candidateId, { from: accounts[1]});
+      return electionInstance.vote(candidateId, { from: accounts[1]});    // cast first vote
     }).then(function(receipt){
       assert.equal(receipt.logs.length,1,"an event was triggered");
       assert.equal(receipt.logs[0].event,"votedEvent","the event type is correct");
       assert.equal(receipt.logs[0].args._candidateId.toNumber(),candidateId,"the candidate id is correct");
       return electionInstance.voters(accounts[1]);
     }).then(function(voter){
-      assert.equal(voter[2], true, "contains the correct voting state");
+      assert.equal(voter[2], true, "contains the correct voting state");  // check voter struct's hasVoted value
       return electionInstance.candidates(candidateId);
     }).then(function(candidate){
       var voteCount = candidate[2];
@@ -94,7 +94,7 @@ it("Successful vote casting by single voter",function(){
   it("Invalid candidate voting exception", function() {
   return Election.deployed().then(function(instance) {
     electionInstance = instance;
-    return electionInstance.vote(99, { from: accounts[1] })
+    return electionInstance.vote(99, { from: accounts[1] })   // vote with wrong candidate ID
   }).then(assert.fail).catch(function(error) {
     assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
     return electionInstance.candidates(1);
@@ -114,13 +114,13 @@ it("Double voting exception", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
       candidateId = 2;
-      electionInstance.vote(candidateId, { from: accounts[2] });
+      electionInstance.vote(candidateId, { from: accounts[2] });      // vote from 3rd account on the blockchain
       return electionInstance.candidates(candidateId);
     }).then(function(candidate) {
       var voteCount = candidate[2];
-      assert.equal(voteCount, 1, "accepts first vote");
+      assert.equal(voteCount, 1, "accepts first vote");   // vote is casted
       // Try to vote again
-      return electionInstance.vote(candidateId, { from: accounts[2] });   //double voting case
+      return electionInstance.vote(candidateId, { from: accounts[2] });   //Try to vote again
     }).then(assert.fail).catch(function(error) {
       assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
       return electionInstance.candidates(1);
