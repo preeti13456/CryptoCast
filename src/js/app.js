@@ -26,8 +26,8 @@ App = {
       App.contracts.Election = TruffleContract(election);
       // Connect provider to interact with contract
       App.contracts.Election.setProvider(App.web3Provider);
-     App.listenForEvents();  // event listener call
-    App.listenForNewVoterEvent();
+     App.listenForEvents();  // event listener call for votecasting event
+    App.listenForNewVoterEvent(); // event listener call for new voter registration
       return App.render();
     });
   },
@@ -40,8 +40,6 @@ App = {
         toBlock: 'latest'
       }).watch(function(error,event){
         console.log("voting event triggered",event);
-        //Reload when a new vote is recorded
-        App.render();
       })
     })
   },
@@ -53,8 +51,6 @@ App = {
           toBlock: 'latest'
         }).watch(function(error,event){
           console.log("new voter event triggered",event);
-          //Reload when a new vote is recorded
-          App.render();
         })
       })
   },
@@ -137,6 +133,8 @@ castVote: function() {    // function is called  during vote casting
       // Wait for votes to update
       $("#content").hide();
       $("#loader").show();
+      //Reload everything when a new vote is recorded
+     App.init();
     }).catch(function(err) {
       console.error(err);
     });
@@ -151,6 +149,9 @@ createVoter: function() {   // function is called  during voter registration
         // Wait for votes to update
         $("#content").hide();
         $("#loader").show();
+
+        //Reload everything when a new voter is created
+        App.init();
       }).catch(function(err) {
         console.error(err);
       });
