@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "cache-base": "^4.0.0",
-    "chokidar": "^3.4.2"
+    "chokidar": "^3.4.2",
+    "ethereumjs-abi": "^0.6.8"
   }
 }

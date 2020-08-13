@@ -45,7 +45,7 @@ constructor() public {
 // candidates are pre populated for the election (privately intitialized by the contract)
 function addCandidate(string _name) private {
 candidatesCount++;
-candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+candidates[candidatesCount] = Candidate(candidatesCount, _name, 0); // Candidate(ID, NAME, VOTECOUNT)
 }
 
 // anyone can register for the election
