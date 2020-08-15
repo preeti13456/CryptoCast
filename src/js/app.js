@@ -2,12 +2,15 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
+  signerAccount: '2417296936bbb66335c6c7b267709f39531ae5ca7427894df10a3ad7496747c9',  //demo signer's off chain private key (not present in any node) [address - 0x1D6EC0e866bC2094c82f77bc40529c131b2599f7]
+  contractAddress: '0x5d080169cc2C7a570Baa4D5B096c4793723447b6',  // locally deployed demo contract Address
 
   init: function() {
     return App.initWeb3();
   },
 
   initWeb3: function() {
+
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
       App.web3Provider = web3.currentProvider;
@@ -62,7 +65,6 @@ App = {
 
   loader.show();
   content.hide();
-
   // Load account data
   web3.eth.getCoinbase(function(err, account) {
     if (err === null) {
@@ -70,7 +72,7 @@ App = {
       $("#accountAddress").html("Your Account: " + account);
     }
   });
-
+  //console.log("accounts[1] - " + web3.eth.accounts[1]);
   // Load contract data
   App.contracts.Election.deployed().then(function(instance) {
     electionInstance = instance;
@@ -127,8 +129,11 @@ App = {
 
 castVote: function() {    // function is called  during vote casting
     var candidateId = $('#candidatesSelect').val();
+    var blindSig = App.PrepareBlindVote(candidateId, App.contractAddress);
+    console.log("Returned signature : " + blindSig);
+
     App.contracts.Election.deployed().then(function(instance) {
-      return instance.vote(candidateId, { from: App.account });
+      return instance.vote(candidateId, blindSig, { from: App.account });
     }).then(function(result) {
       // Wait for votes to update
       $("#content").hide();
@@ -139,6 +144,23 @@ castVote: function() {    // function is called  during vote casting
       console.error(err);
     });
   },
+
+PrepareBlindVote: function(candidateId, contractAdd) {
+    var hash = Web3.utils.soliditySha3({type: 'uint', value: candidateId}, {type: 'address', value: contractAdd}); // calculate the sha3 of given input parameters in the same way solidity would (arguments will be ABI converted and tightly packed before being hashed)
+
+    console.log("Original HASH " + hash);
+    var signature = App.signBlindVote(hash);
+    console.log("HI Signature " + signature);
+    return signature;
+},
+
+signBlindVote: function(hash) {
+    var signObject = web3.eth.accounts.sign(hash, App.signerAccount);
+    console.log("Original message " + signObject.message);
+    console.log("Original messagehash " + signObject.messageHash);
+    console.log("Original Signature " + signObject.signature);
+    return signObject.signature;
+},
 
 createVoter: function() {   // function is called  during voter registration
       var voterNationalID = $('#voterNID').val();
