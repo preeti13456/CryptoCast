@@ -1,6 +1,30 @@
-# Title : Smart-contracts-migration
+# CryptoCast - Blockchain Based Secure Voting System
 
-## Target : Create a Smart Contract which can be helpful for creating a DeFi App for secure voting in elections
+## CryptoCast is Ethereum Blockchain based decentralized application which ensures secure and transparent voting scheme for organizing public and private elections.
+
+## 🎯 Purpose of Blockchain Based E-Voting
+
+### Physical election systems that are prevalent have several drawbacks -
+- Ballots can be internally tampered before or after vote casting
+- Election system does not ensure transparency and security
+- Voters need to trust election authority
+- Double voting issue can occur
+
+### CryptoCast, being a blockchain based E-Voting solution, addresses these issues by adpoting following schemes -
+- Each ballot is **cryptographically signed** using election authority's *private key* 
+- Ballots are **tamper-proof** as those are digitally signed and verified by **smart contract** on the blockchain.
+- **Double voting** is addressed by keeping registered voters' data on Blockchain
+- Election authority does not have access to voter's ballot
+- Elligible voters can only register for the election with their _National Identification Number_.
+
+## :hammer: Technology Stack
+
+* [Truffle](https://www.trufflesuite.com/)
+* [Solidity](https://solidity.readthedocs.io/en/v0.7.0/)
+* [Ganache](https://www.trufflesuite.com/ganache)
+* [Bootstrap](https://getbootstrap.com/)
+* [Node](https://nodejs.org/en/)
+* [Lite-Server](https://www.npmjs.com/package/lite-server)
 
 ## :gift: Resources
 If you're Starting with Blockchain you can refer to :
