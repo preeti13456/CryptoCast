@@ -1,7 +1,7 @@
 {
-  "name": "smart-contracts-migration",
-  "version": "1.0.0",
-  "description": "",
+  "name": "CryptoCast",
+  "version": "1.2.0",
+  "description": "CryptoCast is Ethereum Blockchain based decentralized application which ensures secure and transparent voting scheme for organizing public and private elections.",
   "main": "truffle.js",
   "directories": {
     "test": "test"
@@ -14,12 +14,10 @@
   "contributors": [
     {
       "name": "Anjum Rashid",
-      "email": "anjum.bijoy@gmail.com",
       "url": "https://github.com/bijoy26"
     },
     {
       "name": "Manasir Jisam",
-      "email": "gladevz33@gmail.com",
       "url": "https://github.com/manasir66 "
     }
   ],
